@@ -1,10 +1,15 @@
-import os
-import uuid
-import re
-import logging
-import random
 import base64
+import logging
+import os
+import random
+import re
+import uuid
+
 from colorlog import ColoredFormatter
+
+__all__ = [
+	'LOGGER'
+]
 
 log_level = logging.INFO
 logger_format = "[%(log_color)s%(asctime)s %(levelname)s%(reset)s] %(log_color)s%(message)s%(reset)s"
@@ -27,15 +32,16 @@ VERSION = "1.0"
 TYPE_COLORS = {"dev": 33, "stable": 92}
 
 # Type of version that the program is in "dev" or "stable"
-VERSION_STRING = "\033[92m{}\033[0m(\033[{}m\033[1mdev\033[0m)".format(VERSION, TYPE_COLORS["dev"]) if len(VERSION) >= 4 else \
-    "\033[92m{}\033[0m(\033[{}m\033[1mstable\033[0m)".format(VERSION, TYPE_COLORS["stable"])
+VERSION_STRING = "\033[92m{}\033[0m(\033[{}m\033[1mdev\033[0m)".format(VERSION, TYPE_COLORS["dev"]) if len(
+	VERSION) >= 4 else \
+	"\033[92m{}\033[0m(\033[{}m\033[1mstable\033[0m)".format(VERSION, TYPE_COLORS["stable"])
 
 # Clone link
 CLONE_LINK = "https://github.com/ekultek/pybelt.git"
 
 # Basic legal disclaimer
 LEGAL_DISC = "[!] legal disclaimer: This program is intended for learning purposes, any malicious intent is on you, it is the end users responsibility to obey all laws, regulations, and rules of your respective country or place of origin. For further information about this please see the legal information file under docs or run the --legal flag"
-LONG_LEGAL_DISCLAIMER = open("lib/core/text_files/legal.txt").read()
+LONG_LEGAL_DISCLAIMER = open("/opt/conda/a2/envs/shizzzkit/Pybelt/lib/core/legal.txt").read()
 
 # Random dork to use for basic sqli searches
 # RANDOM_DORK = random.choice(open("{}/lib/core/text_files/dorks.txt".format(PATH)).readlines())
@@ -44,16 +50,16 @@ LONG_LEGAL_DISCLAIMER = open("lib/core/text_files/legal.txt").read()
 SAYING = "The Hackers ToolBelt.."
 
 # Random common column names
-RANDOM_COMMON_COLUMN = random.choice(open("{}/lib/core/text_files/common_columns.txt".format(PATH)).readlines())
+RANDOM_COMMON_COLUMN = random.choice(open("/opt/conda/a2/envs/shizzzkit/Pybelt/lib/core/common_columns.txt".format(PATH)).readlines())
 
 # Search query regex to make sure the URLS have a GET parameter
 QUERY_REGEX = re.compile(r"(.*)[?|#](.*){1}\=(.*)")
 
 SQLI_ERROR_REGEX = (
-    re.compile(r"SQL syntax.*MySQL"),  # You have an error in your SQL syntax
-    re.compile("Warning.*mysql_.*"),  # Warning MySQL syntax contains an error at line ..
-    re.compile(r"valid MySQL result"),  # Your search has produced a invalid MySQL result
-    re.compile(r"MySqlClient\."),  # You have an error located at .. in your MySQL client server
+	re.compile(r"SQL syntax.*MySQL"),  # You have an error in your SQL syntax
+	re.compile("Warning.*mysql_.*"),  # Warning MySQL syntax contains an error at line ..
+	re.compile(r"valid MySQL result"),  # Your search has produced a invalid MySQL result
+	re.compile(r"MySqlClient\."),  # You have an error located at .. in your MySQL client server
 )
 
 SYNTAX_REGEX = re.compile(r"\W+$")
@@ -98,20 +104,20 @@ GOOGLE_TEMP_BLOCK_ERROR_MESSAGE += "\tD) Curse my name and this program"
 
 # List of reserved port numbers, these are the ports that you want to check
 RESERVED_PORTS = {
-    1,   5,   7,   18,  20,  21,  22,  23,  25,  29,  37,  42,  43,  49,
-    53,  69,  70,  79,  80,  103, 108, 109, 110, 115, 118, 119, 137, 139,
-    143, 150, 156, 161, 179, 190, 194, 197, 389, 396, 443, 444, 445, 458,
-    546, 547, 563, 569, 1080
+	1, 5, 7, 18, 20, 21, 22, 23, 25, 29, 37, 42, 43, 49,
+	53, 69, 70, 79, 80, 103, 108, 109, 110, 115, 118, 119, 137, 139,
+	143, 150, 156, 161, 179, 190, 194, 197, 389, 396, 443, 444, 445, 458,
+	546, 547, 563, 569, 1080
 }
 
 
 def create_random_filename():
-    """ Create a random file name
-    >>> print(create_random_filename())
-    56558c08-ee1f-40b4-b048-be4c4066f8b6 """
-    return str(uuid.uuid4())
+	""" Create a random file name
+	>>> print(create_random_filename())
+	56558c08-ee1f-40b4-b048-be4c4066f8b6 """
+	return str(uuid.uuid4())
 
 
 def decode64(string):
-    """ Decode a string from base64 """
-    return base64.b64decode(string)
+	""" Decode a string from base64 """
+	return base64.b64decode(string)
